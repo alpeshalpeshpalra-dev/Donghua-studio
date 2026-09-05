@@ -188,9 +188,9 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         outputs=[media_output, audio_output, srt_output, seed_status]
     )
 
-if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=10000)
-  
+
+    
+
 app = demo.app# Render Launch Code
 if __name__ == "__main__":
     import os
