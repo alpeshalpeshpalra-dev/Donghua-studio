@@ -4,6 +4,7 @@ import asyncio
 import gradio as gr
 import replicate
 import edge_tts
+os.environ["REPLICATE_API_TOKEN"] = "r8_Ki0**********************************"
 
 # 1. Unlimited Voice Generation (Microsoft Edge-TTS)
 async def generate_voice_async(text, voice_type):
