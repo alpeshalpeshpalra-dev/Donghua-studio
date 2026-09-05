@@ -191,6 +191,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
 
     
 
+app = demo.app
 
 if __name__ == "__main__":
     import os
