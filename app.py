@@ -187,9 +187,8 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         ], 
         outputs=[media_output, audio_output, srt_output, seed_status]
     )
+python app.py
 
-
-app = demo.app.app
 
 
 if __name__ == "__main__":
