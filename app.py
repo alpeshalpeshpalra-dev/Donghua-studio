@@ -191,7 +191,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
 
     
 
-app = demo.app# Render Launch Code
+
 if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT", 7860))
