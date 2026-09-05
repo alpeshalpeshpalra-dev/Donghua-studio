@@ -4,15 +4,32 @@ import asyncio
 import gradio as gr
 import replicate
 import edge_tts
+
 os.environ["REPLICATE_API_TOKEN"] = "r8_Ki0**********************************"
 
-# 1. Unlimited Voice Generation (Microsoft Edge-TTS)
+# 1. Multi-Character Voice Library (Microsoft Edge-TTS)
+VOICE_LIBRARY = {
+    "Hero (Male)": {"voice": "hi-IN-MadhurNeural", "rate": "+0%", "pitch": "+0Hz"},
+    "Heroine (Female)": {"voice": "hi-IN-SwaraNeural", "rate": "+0%", "pitch": "+0Hz"},
+    "Kid (Boy)": {"voice": "hi-IN-MadhurNeural", "rate": "+10%", "pitch": "+12Hz"},
+    "Child (Girl)": {"voice": "hi-IN-SwaraNeural", "rate": "+10%", "pitch": "+15Hz"},
+    "Old Man / Master": {"voice": "hi-IN-MadhurNeural", "rate": "-12%", "pitch": "-10Hz"},
+    "Old Woman": {"voice": "hi-IN-SwaraNeural", "rate": "-10%", "pitch": "-8Hz"},
+    "Villain": {"voice": "hi-IN-MadhurNeural", "rate": "-15%", "pitch": "-18Hz"}
+}
+
 async def generate_voice_async(text, voice_type):
-    voice = "hi-IN-MadhurNeural" if voice_type == "Hindi Male (Natural)" else "hi-IN-SwaraNeural"
+    v_info = VOICE_LIBRARY.get(voice_type, VOICE_LIBRARY["Hero (Male)"])
     output_audio = "enhanced_voice.mp3"
-    communicate = edge_tts.Communicate(text, voice, rate="+0%", pitch="+0Hz")
+    communicate = edge_tts.Communicate(
+        text[:20000], 
+        v_info["voice"], 
+        rate=v_info["rate"], 
+        pitch=v_info["pitch"]
+    )
     await communicate.save(output_audio)
     return output_audio
+
 
 # 2. Whisper AI Voice Detection (Silent Parts Skip + Exact Speech Match)
 def detect_voice_and_generate_subtitles(audio_file_path):
